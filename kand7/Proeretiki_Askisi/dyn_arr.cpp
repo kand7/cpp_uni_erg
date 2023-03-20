@@ -17,12 +17,12 @@ int main()
         {
             break;
         }
-        arrSize++;
         if (arrSize == startSize)
         {
             myArray = (int *)realloc(myArray, sizeof(int) * arrSize * 2);
             startSize *= 2;
-                }
+        }
+        arrSize++;
         myArray[index] = userInput;
         index++;
     }
