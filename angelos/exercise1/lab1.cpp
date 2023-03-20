@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
@@ -35,11 +36,11 @@ int main()
 
 void find_2l_elements(int size, double &l1, double &l2, double array[])
 {
-    l1 = l2 = array[0];
+    l1 = l2 = INT_MIN;
 
-    for (int i = 1; i < size; i++)
+    for (int i = 0; i < size; i++)
     {
-        if (array[i] > l2)
+        if (array[i] > l2 && array[i] != l1)
         {
             if (array[i] > l1)
             {
