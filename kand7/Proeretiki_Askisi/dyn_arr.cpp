@@ -4,9 +4,10 @@ using namespace std;
 
 int main()
 {
-    int size = 0;
+    int startSize = 4;
+    int arrSize = 0;
     int index = 0;
-    int *myArray = new int(size);
+    int *myArray = new int[startSize];
     int userInput;
     while (1)
     {
@@ -16,13 +17,17 @@ int main()
         {
             break;
         }
-        size++;
-        myArray = (int *)realloc(myArray, sizeof(int) * size);
+        arrSize++;
+        if (arrSize == startSize)
+        {
+            myArray = (int *)realloc(myArray, sizeof(int) * arrSize * 2);
+            startSize *= 2;
+                }
         myArray[index] = userInput;
         index++;
     }
-    cout << "Size : " << size << endl;
-    for (int i = 0; i < size; i++)
+    cout << "Size : " << arrSize << endl;
+    for (int i = 0; i < arrSize; i++)
     {
         cout << myArray[i];
     }
