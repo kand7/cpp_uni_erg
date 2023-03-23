@@ -5,16 +5,21 @@ using namespace std;
 
 int main()
 {
-    double size = 0;
-    double minimum = 0;
+    int size = 0;
     cout << "Enter the size of your desired Array : ";
     cin >> size;
     printf("\n");
     double *myArray = creatArray(size);
-    minimum = smallest(myArray, size);
+    double &minimum = smallest(myArray, size);
     twoMaxer(myArray, size);
     cout << "Smallest number is : " << minimum << endl;
-    cout << "Smallest number * 2 : " << minimum * 2 << endl;
+    minimum *= 2;
+    cout << "After minimum * 2 we have : " << minimum << "\nOur array is now" << endl;
+    for (int i = 0; i < size; i++)
+    {
+        cout << "Item : " << i << " =>" << myArray[i] << endl;
+    }
+
     free(myArray);
     return 0;
 }
