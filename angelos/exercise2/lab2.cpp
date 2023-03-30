@@ -88,10 +88,12 @@ Student::Student(Student &copyStudent)
 
 Student::~Student()
 {
+    delete[] id;
 }
 
 void Student::setId(char *id)
 {
+    delete[] this->id;
     int size = strlen(id);
     this->id = new char[size + 1];
     strcpy(this->id, id);
