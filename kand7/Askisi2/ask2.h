@@ -29,9 +29,9 @@ public:
     // ΕΚΤΥΠΩΣΗ ΣΤΟΙΧΕΙΩΝ ΣΕ ΟΠΟΙΟΔΗΠΟΤΕ ΚΑΝΑΛΙ ΕΞΟΔΟΥ
     void printInformation(ostream &);
     // ΜΕΤΑΑΥΞΗΣΗ
-    void operator++(int);
+    Student operator++(int);
     // ΠΡΟΑΥΞΗΣΗ
-    Student &operator++();
+    Student operator++();
     // ΤΕΛΕΣΤΗΣ +=
-    Student operator+=(const Student &);
+    void operator+=(unsigned int);
 };

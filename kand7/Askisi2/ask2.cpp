@@ -89,19 +89,23 @@ void Student::printInformation(ostream &out)
 	// out << ", Name : " << this->name << ", Semester : " << this->semester << endl;
 	out << "AΡΙΘΜΟΣ ΜΗΤΡΩΟΥ : " << this->am << " , ΟΝΟΜΑΤΕΠΩΝΥΜΟ : " << this->name << " , ΕΞΑΜΗΝΟ : " << this->semester << endl;
 }
-void Student::operator++(int)
+// ΜΕΤΑ-ΑΥΞΗΣΗ
+Student Student::operator++(int)
 {
+	// ΧΡΕΙΑΖΟΜΑΣΤΕ ΕΝΑ TEMP ΑΝΤΙΚΕΙΜΕΝΟ ΤΟ ΟΠΟΙΟ ΘΑ ΕΠΙΣΤΡΑΦΕΙ. Η ΠΑΛΙΑ ΤΙΜΗ ΤΟΥ ΚΑΝΟΝΙΚΟΥ ΜΑΣ ΑΝΤΙΚΕΙΜΕΝΟΥ ΠΡΙΝ ΤΗΝ ΑΥΞΗΣΗ
+	Student temp = *this;
 	this->semester++;
+	return temp;
 }
-Student &Student::operator++()
+// ΠΡΟ-ΑΥΞΗΣΗ
+Student Student::operator++()
 {
-	++this->semester;
+	this->semester = this->semester + 1;
 	return *this;
 }
-Student Student::operator+=(const Student &st)
+void Student::operator+=(unsigned int semester)
 {
-	this->semester += st.semester;
-	return *this;
+	this->semester = this->semester + semester;
 }
 int main()
 {
