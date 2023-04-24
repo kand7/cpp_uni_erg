@@ -3,19 +3,23 @@
 #include "ask2.h"
 
 using namespace std;
-// Consturctor A
+// ΚΑΤΑΣΚΕΥΑΣΤΗΣ ΜΕ ΑΜ ΚΑΙ ΟΝΟΜΑΤΕΠΩΝΥΜΟ
 Student::Student(const char *am, string name)
 {
 	int sizeAm = strlen(am);
 	this->name = name;
 	this->semester = 1;
 	this->am = new char[sizeAm + 1];
+	// ΤΡΟΠΟΣ Α
+	/*
 	for (int i = 0; i < sizeAm; i++)
 	{
 		this->am[i] = am[i];
-	}
+	}*/
+	// ΤΡΟΠΟΣ Β
+	strcpy(this->am, am);
 }
-// Consturctor B
+// ΚΑΤΑΣΚΕΥΑΣΤΗΣ ΜΕ ΟΛΑ ΤΑ ΣΤΟΙΧΕΙΑ
 Student::Student(const char *am, string name, unsigned int semester)
 {
 	int sizeAm = strlen(am);
@@ -24,7 +28,7 @@ Student::Student(const char *am, string name, unsigned int semester)
 	this->am = new char[sizeAm + 1];
 	strcpy(this->am, am);
 }
-// Consturctor C
+// ΚΑΤΑΣΚΕΥΑΣΤΗΣ ΑΠΟ ΑΛΛΟ ΑΝΤΙΚΕΙΜΕΝΟ - COPY CONSTRUCTOR
 Student::Student(const Student &stud)
 {
 	int sizeAm = strlen(stud.am);
@@ -33,30 +37,27 @@ Student::Student(const Student &stud)
 	this->name = stud.name;
 	this->semester = stud.semester;
 }
-// Destructor
+// ΚΑΤΑΣΤΡΟΦΕΑΣ
 Student::~Student()
 {
 	delete[] this->am;
 }
-// Getter AM
+// GETTER AM
 char *Student::getAm()
 {
-	int amSize = strlen(this->am);
-	char *studentsAm = new char[amSize + 1];
-	strcpy(studentsAm, this->am);
-	return studentsAm;
+	return this->am;
 }
-// Getter Name
+// GETTER NAME
 string Student::getName()
 {
 	return this->name;
 }
-// Getter Semester
+// GETTER SEMESTER
 unsigned int Student::getSemester()
 {
 	return this->semester;
 }
-// Setter AM
+// SETTER AM
 void Student::setAm(const char *am)
 {
 	delete[] this->am;
@@ -64,24 +65,29 @@ void Student::setAm(const char *am)
 	this->am = new char[sizeAm + 1];
 	strcpy(this->am, am);
 }
-// Setter Name
+// SETTER NAME
 void Student::setName(string name)
 {
 	this->name = name;
 }
-// Setter Semester
+// SETTER SEMESTER
 void Student::setSemester(unsigned int semester)
 {
 	this->semester = semester;
 }
 void Student::printInformation(ostream &out)
 {
+	// ΕΚΤΥΠΩΣΗ ΜΕ ΤΗΝ ΧΡΗΣΗ FOR
+	/*
 	out << "AM : ";
+
 	for (int i = 0; i < strlen(this->am); i++)
 	{
 		out << this->am[i];
 	}
-	out << ", Name : " << this->name << ", Semester : " << this->semester << endl;
+	*/
+	// out << ", Name : " << this->name << ", Semester : " << this->semester << endl;
+	out << "AΡΙΘΜΟΣ ΜΗΤΡΩΟΥ : " << this->am << " , ΟΝΟΜΑΤΕΠΩΝΥΜΟ : " << this->name << " , ΕΞΑΜΗΝΟ : " << this->semester << endl;
 }
 void Student::operator++(int)
 {
@@ -92,44 +98,33 @@ Student &Student::operator++()
 	++this->semester;
 	return *this;
 }
-Student &Student::operator+=(const Student &st)
+Student Student::operator+=(const Student &st)
 {
 	this->semester += st.semester;
 	return *this;
 }
-Student &Student::operator-=(const Student &st)
-{
-	this->semester -= st.semester;
-	return *this;
-}
-Student &Student::operator+=(unsigned int a)
-{
-	this->semester += a;
-	return *this;
-}
-Student &Student::operator-=(unsigned int a)
-{
-	this->semester -= a;
-	return *this;
-}
 int main()
 {
-	Student student1 = Student("16665", "Viktor Romanyuk");
-	Student student2 = Student("69696969", "Aggelos Yo", 11);
-	Student student3 = Student(student2);
+	cout << "Ξεκινάει δημιουργία αντικειμένων με την χρήση των  κατασκευαστών..." << endl;
+	Student student1("713242017024", "ΒΙΚΤΩΡ ΡΟΜΑΝΙΟΥΚ");
+	Student student2("713242017025", "ΑΝΤΩΝΗΣ ΑΝΤΩΝΙΟΥ", 7);
+	Student student3(student1);
+	cout << "Εκτύπωση των στοιχείων κάθε φοιτητή" << endl;
 	student1.printInformation(cout);
 	student2.printInformation(cout);
 	student3.printInformation(cout);
-	student1++;
-	cout << student1.getSemester();
-	++student1;
-	printf("\n");
-	cout << student1.getSemester();
-	student1 += student3;
-	cout << " " << student1.getSemester();
-	student1 -= student3;
-	cout << " " << student1.getSemester();
-	student1 += 10000;
-	cout << " " << student1.getSemester();
+	// ΕΛΕΓΧΟΣ SETTERS
+	cout << "Έλεγχος setters και getters" << endl;
+	cout << "Αλλαγή εξαμήνου του πρώτου φοιτητή" << endl;
+	student1.setSemester(15);
+	cout << "Αλλαγή ονόματος του τρίτου φοιτητή" << endl;
+	student3.setName("ΚΩΣΤΑΣ ΚΩΣΤΑΝΤΙΝΙΔΗΣ");
+	cout << "Αλλαγή αριθμού μητρώου του δεύτερου φοιτητή" << endl;
+	student2.setAm("ice45672");
+	// ΕΛΕΓΧΟΣ GETTERS
+	cout << "Το εξάμηνο του πρώτου φοιτητή πλέον ειναι : " << student1.getSemester() << endl;
+	cout << "Το όνομα του τρίτου φοιτητή πλέον είναι : " << student3.getName() << endl;
+	cout << "Ο αριθμός μητρώου του δεύτερου φοιτητή είναι : " << student2.getAm() << endl;
+
 	return 0;
 }

@@ -5,36 +5,33 @@ using namespace std;
 
 class Student
 {
-
+    // ΙΔΙΟΤΗΤΕΣ
 private:
     char *am;
     string name;
     unsigned int semester;
-
+    // ΜΕΘΟΔΟΙ
 public:
-    // Constructors
+    // ΚΑΤΑΣΚΕΥΑΣΤΕΣ
     Student(const char *, string);
     Student(const char *, string, unsigned int);
     Student(const Student &);
-    // Destructor
+    // ΚΑΤΑΣΤΡΟΦΕΑΣ
     ~Student();
-    // Getters
+    // GETTERS
     char *getAm();
     string getName();
     unsigned int getSemester();
-    // Setters
+    // SETTER
     void setAm(const char *);
     void setName(string);
     void setSemester(unsigned int);
-    // Print to any outstream
+    // ΕΚΤΥΠΩΣΗ ΣΤΟΙΧΕΙΩΝ ΣΕ ΟΠΟΙΟΔΗΠΟΤΕ ΚΑΝΑΛΙ ΕΞΟΔΟΥ
     void printInformation(ostream &);
-    // Μετααύξηση
+    // ΜΕΤΑΑΥΞΗΣΗ
     void operator++(int);
-    // Προαυξηση
+    // ΠΡΟΑΥΞΗΣΗ
     Student &operator++();
-    // +=/-=
-    Student &operator+=(const Student &);
-    Student &operator-=(const Student &);
-    Student &operator+=(unsigned int);
-    Student &operator-=(unsigned int);
+    // ΤΕΛΕΣΤΗΣ +=
+    Student operator+=(const Student &);
 };
