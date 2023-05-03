@@ -33,5 +33,7 @@ public:
     // ΠΡΟΑΥΞΗΣΗ
     Student operator++();
     // ΤΕΛΕΣΤΗΣ +=
-    void operator+=(unsigned int);
+    Student operator+=(unsigned int);
+    Student operator+=(Student &);
+    Student operator=(const Student &); // ΓΙΑ ΝΑ ΜΠΟΡΕΣΩ ΝΑ ΚΑΝΩ student4 = ++student3;
 };

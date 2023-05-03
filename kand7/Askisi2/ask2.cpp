@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include "ask2.h"
-
+#include <limits.h>
 using namespace std;
 // ΚΑΤΑΣΚΕΥΑΣΤΗΣ ΜΕ ΑΜ ΚΑΙ ΟΝΟΜΑΤΕΠΩΝΥΜΟ
 Student::Student(const char *am, string name)
@@ -55,6 +55,7 @@ string Student::getName()
 // GETTER SEMESTER
 unsigned int Student::getSemester()
 {
+
 	return this->semester;
 }
 // SETTER AM
@@ -103,9 +104,35 @@ Student Student::operator++()
 	this->semester = this->semester + 1;
 	return *this;
 }
-void Student::operator+=(unsigned int semester)
+Student Student::operator+=(unsigned int semester)
 {
-	this->semester = this->semester + semester;
+	if (semester > 0 and semester < UINT_MAX)
+	{
+		this->semester = this->semester + semester;
+	}
+	else
+		cout << "Μη-προσιμασμένος ακέραιος εκτός ορίων" << endl;
+	return *this;
+}
+Student Student::operator+=(Student &s)
+{
+	if (s.semester > 0 and s.semester < UINT_MAX)
+	{
+		this->semester = this->semester + s.semester;
+	}
+	else
+		cout << "Μη-προσιμασμένος ακέραιος εκτός ορίων" << endl;
+	return *this;
+}
+Student Student::operator=(const Student &s)
+{
+	delete[] this->am;
+	int sizeAM = strlen(s.am);
+	this->am = new char[sizeAM + 1];
+	strcpy(this->am, s.am);
+	this->name = s.name;
+	this->semester = s.semester;
+	return *this;
 }
 int main()
 {
@@ -129,6 +156,19 @@ int main()
 	cout << "Το εξάμηνο του πρώτου φοιτητή πλέον ειναι : " << student1.getSemester() << endl;
 	cout << "Το όνομα του τρίτου φοιτητή πλέον είναι : " << student3.getName() << endl;
 	cout << "Ο αριθμός μητρώου του δεύτερου φοιτητή είναι : " << student2.getAm() << endl;
-
+	// ΕΛΕΓΧΟΣ ΥΠΕΡΦΟΡΤΩΣΗΣ ΤΕΛΕΣΤΩΝ ++ ΠΡΟ-ΜΕΤΑ ΑΥΞΗΣΗΣ ΚΑΙ =+
+	cout << "Το εξάμηνο του φοιτητή 1 είναι : " << student1.getSemester() << endl;
+	cout << "Η ΠΡΟ όπως και η ΜΕΤΑ αύξηση επιστρέφουν αντικείμενο τύπου Student\n";
+	cout << "Θα δημιουργήσουμε ένα φοιτητή student4 και εναν φοιτητή student5 και θα δούμε τις αλλαγές στο εξαμηνό τους μετα την χρήση των τελεστών προ-μετα αύξησης στον student1\n";
+	Student student4("713242017033", "ΒΑΣΙΛΗΣ ΒΑΣΙΛΙΟΥ");
+	cout << "Το τρέχον εξάμηνο του φοιτητή4 είναι : " << student4.getSemester() << endl;
+	cout << "Προ-αύξηση στο student1\n";
+	student4 = ++student1;
+	cout << "Το εξάμηνο του student4 έγινε " << student4.getSemester() << " και το εξάμηνο του student1 έγινε : " << student1.getSemester() << endl;
+	cout << "Μέτα-αύξηση στο student1\n";
+	Student student5 = student4;
+	student5 = student1++;
+	cout << "Το εξάμηνο του student5 παρέμεινε " << student5.getSemester() << " επειδή επιστρέφεται η τιμή του student1 πριν αυξηθεί το εξάμηνο του"
+		 << " και το εξάμηνο του student1 έγινε : " << student1.getSemester() << endl;
 	return 0;
 }
