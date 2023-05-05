@@ -1,3 +1,6 @@
+/* ΟΝΟΜΑ : ΒΙΚΤΩΡ
+	ΕΠΩΝΥΜΟ : ΡΟΜΑΝΙΟΥΚ
+	ΑΜ : 713242017024*/
 #include <iostream>
 #include <string.h>
 #include <limits.h>
