@@ -9,43 +9,43 @@ using namespace std;
 
 class Student
 {
-    // ΙΔΙΟΤΗΤΕΣ
+	// ΙΔΙΟΤΗΤΕΣ
 private:
-    char *am;
-    string name;
-    unsigned int semester;
-    // ΜΕΘΟΔΟΙ
+	char *am;
+	string name;
+	unsigned int semester;
+	// ΜΕΘΟΔΟΙ
 public:
-    // ΚΑΤΑΣΚΕΥΑΣΤΕΣ
-    // Α
-    Student(const char *, string);
-    // Β
-    Student(const char *, string, unsigned int);
-    // Γ (ΑΝΤΙΓΡΑΦΕΑΣ)
-    Student(const Student &);
-    // ΚΑΤΑΣΤΡΟΦΕΑΣ
-    ~Student();
-    // GETTERS
-    char *getAm() const;
-    string getName() const;
-    unsigned int getSemester() const;
-    // SETTER
-    void setAm(const char *);
-    void setName(string);
-    void setSemester(unsigned int);
-    // ΕΚΤΥΠΩΣΗ ΣΤΟΙΧΕΙΩΝ ΣΕ ΟΠΟΙΟΔΗΠΟΤΕ ΚΑΝΑΛΙ ΕΞΟΔΟΥ
-    void printInformation(ostream &) const;
-    // ΜΕΤΑΑΥΞΗΣΗ
-    // ΟΙ ΤΥΠΟΥ ΕΠΙΣΤΡΟΦΗΣ ΕΙΝΑΙ ΟΛΟΙ Student, ΘΑ ΜΠΟΡΟΥΣΑΜΕ ΝΑ ΔΩΣΟΥΜΕ ΚΑΙ ΑΝΑΦΟΡΑ
-    Student operator++(int);
-    // ΥΛΟΠΟΙΗΘΗΚΕ ΚΑΙ Η ΠΡΟΑΥΞΗΣΗ ΓΙΑ ΕΞΑΣΚΗΣΗ
-    Student operator++();
-    // ΤΕΛΕΣΤΗΣ +=
-    Student operator+=(unsigned int);
-    Student operator+=(Student &);
-    Student operator-=(unsigned int);
-    Student operator-=(Student &);
-    Student & operator=(const Student &); // ΓΙΑ ΝΑ ΜΠΟΡΕΣΩ ΝΑ ΚΑΝΩ student4 = ++student3;
+	// ΚΑΤΑΣΚΕΥΑΣΤΕΣ
+	// Α
+	Student(const char *, string);
+	// Β
+	Student(const char *, string, unsigned int);
+	// Γ (ΑΝΤΙΓΡΑΦΕΑΣ)
+	Student(const Student &);
+	// ΚΑΤΑΣΤΡΟΦΕΑΣ
+	~Student();
+	// GETTERS
+	char *getAm() const;
+	string getName() const;
+	unsigned int getSemester() const;
+	// SETTER
+	void setAm(const char *);
+	void setName(string);
+	void setSemester(unsigned int);
+	// ΕΚΤΥΠΩΣΗ ΣΤΟΙΧΕΙΩΝ ΣΕ ΟΠΟΙΟΔΗΠΟΤΕ ΚΑΝΑΛΙ ΕΞΟΔΟΥ
+	void printInformation(ostream &) const;
+	// ΜΕΤΑΑΥΞΗΣΗ
+	// ΟΙ ΤΥΠΟΥ ΕΠΙΣΤΡΟΦΗΣ ΕΙΝΑΙ ΟΛΟΙ Student, ΘΑ ΜΠΟΡΟΥΣΑΜΕ ΝΑ ΔΩΣΟΥΜΕ ΚΑΙ ΑΝΑΦΟΡΑ
+	Student operator++(int);
+	// ΥΛΟΠΟΙΗΘΗΚΕ ΚΑΙ Η ΠΡΟΑΥΞΗΣΗ ΓΙΑ ΕΞΑΣΚΗΣΗ
+	Student operator++();
+	// ΤΕΛΕΣΤΗΣ +=
+	Student operator+=(unsigned int);
+	Student operator+=(Student &);
+	Student operator-=(unsigned int);
+	Student operator-=(Student &);
+	Student &operator=(const Student &); // ΓΙΑ ΝΑ ΜΠΟΡΕΣΩ ΝΑ ΚΑΝΩ student4 = ++student3;
 };
 // ΚΑΤΑΣΚΕΥΑΣΤΗΣ ΜΕ ΑΜ ΚΑΙ ΟΝΟΜΑΤΕΠΩΝΥΜΟ
 Student::Student(const char *am, string name)
@@ -68,11 +68,15 @@ Student::Student(const char *am, string name, unsigned int semester)
 {
 	int sizeAm = strlen(am);
 	this->name = name;
-	if (semester > 0 and semester < UINT_MAX){
-		this->semester = semester;}
-	else {
-		//ΘΑ ΜΠΟΡΟΥΣΑ ΝΑ ΒΑΛΩ ΜΙΑ WHILE ΓΙΑ ΝΑ ΤΡΕΧΕΙ ΜΕΧΡΙ ΝΑ ΔΩΘΕΙ ΣΩΣΤΟ ΕΞΑΜΗΝΟ
+	if (semester > 0 and semester <= UINT_MAX)
+	{ // ΕΛΕΓΧΟΣ ΑΝ ΤΟ ΕΞΑΜΗΝΟ ΕΙΝΑΙ ΜΙΚΡΟΤΕΡΟ Ή ΙΣΟ ΑΠΟ ΤΟ ΜΕΓΙΣΤΟ ΜΗ-ΠΡΟΣ ΑΚΕΡΑΙΟ
+		this->semester = semester;
+	}
+	else
+	{
+		// ΘΑ ΜΠΟΡΟΥΣΑ ΝΑ ΒΑΛΩ ΜΙΑ WHILE ΓΙΑ ΝΑ ΤΡΕΧΕΙ ΜΕΧΡΙ ΝΑ ΔΩΘΕΙ ΣΩΣΤΟ ΕΞΑΜΗΝΟ
 		cout << "ΜΗ-ΠΡΟΣΙΜΑΣΜΕΝΟΣ ΑΡΙΘΜΟΣ ΕΚΤΟΣ ΟΡΙΩΝ.ΤΟ ΕΞΑΜΗΝΟ ΓΙΝΕΤΑΙ 1" << endl;
+		this->semester = 1;
 	}
 	this->am = new char[sizeAm + 1];
 	strcpy(this->am, am);
@@ -123,7 +127,12 @@ void Student::setName(string name)
 // SETTER SEMESTER
 void Student::setSemester(unsigned int semester)
 {
-	this->semester = semester;
+	if ((semester > 0) and (semester <= UINT_MAX))
+	// Μετά απο testing κατάλαβα πως αν δώσουμε αρνητικό αριθμό στην παράμετρο αυτός μετατρέπεται σε μη-προσιμασμέο(αρκετά μεγάλος αριθμός) άρα αυτός ο έλεγχος είναι σπατάλη
+	{
+		this->semester = semester;
+	}
+	// else κανε κατι διαφορετικό. Για παράδειγμα να ζητάμε απο τον χρήστη έγκυρο αριθμό
 }
 void Student::printInformation(ostream &out) const
 {
@@ -144,65 +153,75 @@ Student Student::operator++(int)
 {
 	// ΧΡΕΙΑΖΟΜΑΣΤΕ ΕΝΑ TEMP ΑΝΤΙΚΕΙΜΕΝΟ ΤΟ ΟΠΟΙΟ ΘΑ ΕΠΙΣΤΡΑΦΕΙ ΤΗ ΠΑΛΙΑ ΤΙΜΗ ΤΟΥ ΑΝΤΙΚΕΙΜΕΝΟΥ ΠΡΙΝ ΤΗΝ ΑΥΞΗΣΗ
 	Student temp = *this;
-	this->semester++;
+	if ((this->semester + 1) <= UINT_MAX)
+	{
+		this->semester++;
+	}
 	return temp;
 }
 // ΠΡΟ-ΑΥΞΗΣΗ
 Student Student::operator++()
 {
-	this->semester = this->semester + 1;
+	if ((this->semester + 1) <= UINT_MAX)
+		this->semester = this->semester + 1;
 	return *this;
 }
 // += ΜΕ ΜΗ-ΠΡΟΣΙΜΑΣΜΕΝΟ ΑΚΕΡΑΙΟ
 Student Student::operator+=(unsigned int semester)
 {
-	//ΘΕΛΟΥΜΕ ΕΛΕΓΧΟ
+	// ΘΕΛΟΥΜΕ ΕΛΕΓΧΟ
 	if (semester > 0 and semester < UINT_MAX)
 	{
-		//ΚΑΝΟΝΙΚΑ ΘΑ ΠΡΕΠΕΙ ΝΑ ΒΑΛΟΥΜΕ ΑΚΟΜΑ ΕΝΑΝ ΕΛΕΓΧΟ ΠΡΙΝ ΓΙΝΕΙ Η ΠΡΟΣΘΑΙΣΗ ΓΙΑ ΝΑ ΔΟΥΜΕ ΑΝ ΤΟ ΑΠΟΤΕΛΕΣΜΑ ΘΑ ΕΙΝΑΙ ΜΙΚΡΟΤΕΡΟ ΑΠΟ ΤΟ ΟΡΙΟ ΠΡΙΝ ΕΚΤΕΛΕΣΤΕΙ
-		if ((this->semester+=semester) < UINT_MAX){
+		// ΚΑΝΟΝΙΚΑ ΘΑ ΠΡΕΠΕΙ ΝΑ ΒΑΛΟΥΜΕ ΑΚΟΜΑ ΕΝΑΝ ΕΛΕΓΧΟ ΠΡΙΝ ΓΙΝΕΙ Η ΠΡΟΣΘΑΙΣΗ ΓΙΑ ΝΑ ΔΟΥΜΕ ΑΝ ΤΟ ΑΠΟΤΕΛΕΣΜΑ ΘΑ ΕΙΝΑΙ ΜΙΚΡΟΤΕΡΟ ΑΠΟ ΤΟ ΟΡΙΟ ΠΡΙΝ ΕΚΤΕΛΕΣΤΕΙ
+		if ((this->semester + semester) <= UINT_MAX)
+		{
 			this->semester = this->semester + semester;
 		}
-		else 
+		else
 			cout << "Μη-προσιμασμένος ακέραιος εκτός ορίων" << endl;
-		
 	}
 	else
 		cout << "Μη-προσιμασμένος ακέραιος εκτός ορίων" << endl;
-	return *this; 
+	return *this; // ΘΑ ΕΠΙΣΤΡΑΦΗ ΤΟ ΑΠΟΤΕΛΕΣΜΑ ΑΝ ΟΛΑ ΕΙΝΑΙ ΕΝΤΑΞΗ Ή ΘΑ ΠΑΡΑΜΕΙΝΕΙ Η ΠΑΛΙΑ ΤΙΜΗ
 }
 // += ΣΕ ΜΕ ΑΛΛΟΝ ΦΟΙΤΗΤΗ
 Student Student::operator+=(Student &s)
 {
-	//ΘΑ ΠΡΕΠΕΙ ΝΑ ΓΙΝΕΙ Ο ΙΔΙΟΣ ΕΛΕΓΧΟΣ ΓΙΑ ΤΗΝ ΠΡΟΣΘΑΙΣΗ ΚΑΙ ΕΔΩ
-	if ((this->semester+=s.semester) < UINT_MAX){
+	// ΘΑ ΠΡΕΠΕΙ ΝΑ ΓΙΝΕΙ Ο ΙΔΙΟΣ ΕΛΕΓΧΟΣ ΓΙΑ ΤΗΝ ΠΡΟΣΘΑΙΣΗ ΚΑΙ ΕΔΩ
+	if ((this->semester + s.semester) <= UINT_MAX)
+	{
 		this->semester = this->semester + s.semester;
 	}
-	else cout << "Μη-προσιμασμένος ακέραιος εκτός ορίων" << endl;
-
-	return *this;
-}
-Student Student::operator-=(unsigned int semester){
-		if (this->semester>=semester){
-			this->semester-=semester;
-		}
-		else
+	else
 		cout << "Μη-προσιμασμένος ακέραιος εκτός ορίων" << endl;
-		return *this;
 
+	return *this; // ΘΑ ΕΠΙΣΤΡΑΦΗ ΤΟ ΑΠΟΤΕΛΕΣΜΑ ΑΝ ΟΛΑ ΕΙΝΑΙ ΕΝΤΑΞΗ Ή ΘΑ ΠΑΡΑΜΕΙΝΕΙ Η ΠΑΛΙΑ ΤΙΜΗ
 }
-Student Student::operator-=(Student &s){
-	if (this->semester>s.semester){
-			this->semester-=s.semester;	
-		}
-		else
+Student Student::operator-=(unsigned int semester)
+{
+	if (this->semester > semester)
+	{
+		this->semester -= semester;
+	}
+	else
 		cout << "Μη-προσιμασμένος ακέραιος εκτός ορίων" << endl;
-	return *this;
+	return *this; // ΘΑ ΕΠΙΣΤΡΑΦΗ ΤΟ ΑΠΟΤΕΛΕΣΜΑ ΑΝ ΟΛΑ ΕΙΝΑΙ ΕΝΤΑΞΗ Ή ΘΑ ΠΑΡΑΜΕΙΝΕΙ Η ΠΑΛΙΑ ΤΙΜΗ
+}
+Student Student::operator-=(Student &s)
+{
+	if (this->semester > s.semester)
+	{
+		this->semester -= s.semester;
+	}
+	else
+		cout << "Μη-προσιμασμένος ακέραιος εκτός ορίων" << endl;
+	return *this; // ΘΑ ΕΠΙΣΤΡΑΦΗ ΤΟ ΑΠΟΤΕΛΕΣΜΑ ΑΝ ΟΛΑ ΕΙΝΑΙ ΕΝΤΑΞΗ Ή ΘΑ ΠΑΡΑΜΕΙΝΕΙ Η ΠΑΛΙΑ ΤΙΜΗ
 }
 // (ΕΧΤΡΑ) ΥΠΕΡΦΟΤΩΣΗ ΤΟΥ = ΓΙΑ ΝΑ ΜΠΟΡΕΣΩ ΝΑ ΤΡΕΞΩ stud1 = ++std2. Ο stud1 έχει δημιουργηθεί πρίν.
-Student& Student::operator=(const Student &s)
+Student &Student::operator=(const Student &s)
 {
-	if (!(this==&s)){
+	if (!(this == &s))
+	{
 		delete[] this->am;
 		int sizeAM = strlen(s.am);
 		this->am = new char[sizeAM + 1];
@@ -211,11 +230,11 @@ Student& Student::operator=(const Student &s)
 		this->semester = s.semester;
 	}
 	return *this;
-
 }
 int main()
 {
-	cout << "Ξεκινάει δημιουργία αντικειμένων με την χρήση των  κατασκευαστών...\n" << endl;
+	cout << "Ξεκινάει δημιουργία αντικειμένων με την χρήση των  κατασκευαστών...\n"
+		 << endl;
 	Student student1("713242017024", "ΒΙΚΤΩΡ ΡΟΜΑΝΙΟΥΚ");
 	Student student2("713242017025", "ΑΝΤΩΝΗΣ ΑΝΤΩΝΙΟΥ", 7);
 	Student student3(student1);
@@ -266,14 +285,14 @@ int main()
 	printf("\n");
 	cout << "Το εξάμηνο του φοιτητή 2 είναι " << student2.getSemester() << endl;
 	cout << "Αν εκτελέσουμε student1-=student2 θα πάρουμε : ";
-	student1-=student2;
+	student1 -= student2;
 	cout << student1.getSemester() << endl;
 	Student student6 = student1;
 	printf("\n\n\n");
-		cout << "Φτιάξε εναν student6 για να δοκιμάσουμε student6=student1-=2\n" << "Το εξάμηνο του student6 είναι : " << student6.getSemester() << endl;
-	student6=student1-=1;
-	cout <<"Tο εξάμηνο του φοιτητή 6 έγινε : " << student6.getSemester() << endl;
-
+	cout << "Φτιάξε εναν student6 για να δοκιμάσουμε student6=student1-=2\n"
+		 << "Το εξάμηνο του student6 είναι : " << student6.getSemester() << endl;
+	student6 = student1 -= 1;
+	cout << "Tο εξάμηνο του student6 έγινε : " << student6.getSemester() << endl;
 
 	return 0;
 }
