@@ -1,0 +1,8 @@
+Βιβλιοθηκη STL
+use of templates
+class Course{}
+class Student{
+	list<Course*> declared;
+	list<pair<Course*,float>> passed;
+	//add to list
+	//read from list
