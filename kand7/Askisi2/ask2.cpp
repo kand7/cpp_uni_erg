@@ -287,67 +287,65 @@ Student &Student::operator=(const Student &s)
 }
 int main()
 {
-	// cout << "Ξεκινάει δημιουργία αντικειμένων με την χρήση των  κατασκευαστών...\n"
-	// 	 << endl;
-	// Student student1("713242017024", "ΒΙΚΤΩΡ ΡΟΜΑΝΙΟΥΚ");
-	// Student student2("713242017025", "ΑΝΤΩΝΗΣ ΑΝΤΩΝΙΟΥ", 7);
-	// Student student3(student1);
-	// cout << "Εκτύπωση των στοιχείων κάθε φοιτητή" << endl;
-	// student1.printInformation(cout);
-	// student2.printInformation(cout);
-	// student3.printInformation(cout);
-	// printf("\n\n\n");
-	// // ΕΛΕΓΧΟΣ SETTERS
-	// cout << "Έλεγχος setters και getters" << endl;
-	// printf("\n\n");
-	// cout << "Αλλαγή εξαμήνου του πρώτου φοιτητή" << endl;
-	// student1.setSemester(15);
-	// cout << "Αλλαγή ονόματος του τρίτου φοιτητή" << endl;
-	// student3.setName("ΚΩΣΤΑΣ ΚΩΣΤΑΝΤΙΝΙΔΗΣ");
-	// cout << "Αλλαγή αριθμού μητρώου του δεύτερου φοιτητή" << endl;
-	// student2.setAm("ice45672");
-	// // ΕΛΕΓΧΟΣ GETTERS
-	// printf("\n\n");
-	// cout << "Το εξάμηνο του πρώτου φοιτητή πλέον ειναι : " << student1.getSemester() << endl;
-	// cout << "Το όνομα του τρίτου φοιτητή πλέον είναι : " << student3.getName() << endl;
-	// cout << "Ο αριθμός μητρώου του δεύτερου φοιτητή είναι : " << student2.getAm() << endl;
-	// // ΕΛΕΓΧΟΣ ΥΠΕΡΦΟΡΤΩΣΗΣ ΤΕΛΕΣΤΩΝ ++ ΠΡΟ-ΜΕΤΑ ΑΥΞΗΣΗΣ ΚΑΙ =+
-	// cout << "Το εξάμηνο του φοιτητή 1 είναι : " << student1.getSemester() << endl;
-	// printf("\n\n\n");
-	// cout << "Η ΠΡΟ όπως και η ΜΕΤΑ αύξηση επιστρέφουν αντικείμενο τύπου Student\n";
-	// cout << "Θα δημιουργήσουμε ένα φοιτητή student4 και εναν φοιτητή student5 και θα δούμε τις αλλαγές στο εξαμηνό τους μετα την χρήση των τελεστών προ-μετα αύξησης στον student1\n";
-	// Student student4("713242017033", "ΒΑΣΙΛΗΣ ΒΑΣΙΛΙΟΥ");
-	// printf("\n\n");
-	// cout << "Το τρέχον εξάμηνο του φοιτητή4 είναι : " << student4.getSemester() << endl;
-	// cout << "Προ-αύξηση στο student1\n";
-	// student4 = ++student1;
-	// printf("\n");
-	// cout << "Το εξάμηνο του student4 έγινε " << student4.getSemester() << " και το εξάμηνο του student1 έγινε : " << student1.getSemester() << endl;
-	// printf("\n");
-	// cout << "Μέτα-αύξηση στο student1\n";
-	// printf("\n");
-	// Student student5 = student4;
-	// student5 = student1++;
-	// cout << "Το εξάμηνο του student5 παρέμεινε " << student5.getSemester() << " επειδή επιστρέφεται η τιμή του student1 πριν αυξηθεί το εξάμηνο του"
-	// 	 << " και το εξάμηνο του student1 έγινε : " << student1.getSemester() << endl;
-	// printf("\n\n\n");
-	// cout << "Χρήση τελεστών -= με μη-προσημασμένο ακέραιο και φοιτητή" << endl;
-	// printf("\n");
-	// cout << "Εξάμηνο φοιτητή 1 πρίν το -= 5 είναι " << student1.getSemester() << endl;
-	// student1 -= 5;
-	// cout << "To εξάμηνο πλέον είναι : " << student1.getSemester() << endl;
-	// printf("\n");
-	// cout << "Το εξάμηνο του φοιτητή 2 είναι " << student2.getSemester() << endl;
-	// cout << "Αν εκτελέσουμε student1-=student2 θα πάρουμε : ";
-	// student1 -= student2;
-	// cout << student1.getSemester() << endl;
-	// Student student6 = student1;
-	// printf("\n\n\n");
-	// cout << "Φτιάξε εναν student6 για να δοκιμάσουμε student6=student1-=2\n"
-	// 	 << "Το εξάμηνο του student6 είναι : " << student6.getSemester() << endl;
-	// student6 = student1 -= 1;
-	// cout << "Tο εξάμηνο του student6 έγινε : " << student6.getSemester() << endl;
-	Subject sub1("13232", "Graphics", 15, "καλοκαιρι");
-	sub1.setSubSemester("αντρασ");
+	cout << "Ξεκινάει δημιουργία αντικειμένων με την χρήση των  κατασκευαστών...\n"
+		 << endl;
+	Student student1("713242017024", "ΒΙΚΤΩΡ ΡΟΜΑΝΙΟΥΚ");
+	Student student2("713242017025", "ΑΝΤΩΝΗΣ ΑΝΤΩΝΙΟΥ", 7);
+	Student student3(student1);
+	cout << "Εκτύπωση των στοιχείων κάθε φοιτητή" << endl;
+	student1.printInformation(cout);
+	student2.printInformation(cout);
+	student3.printInformation(cout);
+	printf("\n\n\n");
+	// ΕΛΕΓΧΟΣ SETTERS
+	cout << "Έλεγχος setters και getters" << endl;
+	printf("\n\n");
+	cout << "Αλλαγή εξαμήνου του πρώτου φοιτητή" << endl;
+	student1.setSemester(15);
+	cout << "Αλλαγή ονόματος του τρίτου φοιτητή" << endl;
+	student3.setName("ΚΩΣΤΑΣ ΚΩΣΤΑΝΤΙΝΙΔΗΣ");
+	cout << "Αλλαγή αριθμού μητρώου του δεύτερου φοιτητή" << endl;
+	student2.setAm("ice45672");
+	// ΕΛΕΓΧΟΣ GETTERS
+	printf("\n\n");
+	cout << "Το εξάμηνο του πρώτου φοιτητή πλέον ειναι : " << student1.getSemester() << endl;
+	cout << "Το όνομα του τρίτου φοιτητή πλέον είναι : " << student3.getName() << endl;
+	cout << "Ο αριθμός μητρώου του δεύτερου φοιτητή είναι : " << student2.getAm() << endl;
+	// ΕΛΕΓΧΟΣ ΥΠΕΡΦΟΡΤΩΣΗΣ ΤΕΛΕΣΤΩΝ ++ ΠΡΟ-ΜΕΤΑ ΑΥΞΗΣΗΣ ΚΑΙ =+
+	cout << "Το εξάμηνο του φοιτητή 1 είναι : " << student1.getSemester() << endl;
+	printf("\n\n\n");
+	cout << "Η ΠΡΟ όπως και η ΜΕΤΑ αύξηση επιστρέφουν αντικείμενο τύπου Student\n";
+	cout << "Θα δημιουργήσουμε ένα φοιτητή student4 και εναν φοιτητή student5 και θα δούμε τις αλλαγές στο εξαμηνό τους μετα την χρήση των τελεστών προ-μετα αύξησης στον student1\n";
+	Student student4("713242017033", "ΒΑΣΙΛΗΣ ΒΑΣΙΛΙΟΥ");
+	printf("\n\n");
+	cout << "Το τρέχον εξάμηνο του φοιτητή4 είναι : " << student4.getSemester() << endl;
+	cout << "Προ-αύξηση στο student1\n";
+	student4 = ++student1;
+	printf("\n");
+	cout << "Το εξάμηνο του student4 έγινε " << student4.getSemester() << " και το εξάμηνο του student1 έγινε : " << student1.getSemester() << endl;
+	printf("\n");
+	cout << "Μέτα-αύξηση στο student1\n";
+	printf("\n");
+	Student student5 = student4;
+	student5 = student1++;
+	cout << "Το εξάμηνο του student5 παρέμεινε " << student5.getSemester() << " επειδή επιστρέφεται η τιμή του student1 πριν αυξηθεί το εξάμηνο του"
+		 << " και το εξάμηνο του student1 έγινε : " << student1.getSemester() << endl;
+	printf("\n\n\n");
+	cout << "Χρήση τελεστών -= με μη-προσημασμένο ακέραιο και φοιτητή" << endl;
+	printf("\n");
+	cout << "Εξάμηνο φοιτητή 1 πρίν το -= 5 είναι " << student1.getSemester() << endl;
+	student1 -= 5;
+	cout << "To εξάμηνο πλέον είναι : " << student1.getSemester() << endl;
+	printf("\n");
+	cout << "Το εξάμηνο του φοιτητή 2 είναι " << student2.getSemester() << endl;
+	cout << "Αν εκτελέσουμε student1-=student2 θα πάρουμε : ";
+	student1 -= student2;
+	cout << student1.getSemester() << endl;
+	Student student6 = student1;
+	printf("\n\n\n");
+	cout << "Φτιάξε εναν student6 για να δοκιμάσουμε student6=student1-=2\n"
+		 << "Το εξάμηνο του student6 είναι : " << student6.getSemester() << endl;
+	student6 = student1 -= 1;
+	cout << "Tο εξάμηνο του student6 έγινε : " << student6.getSemester() << endl;
 	return 0;
 }
